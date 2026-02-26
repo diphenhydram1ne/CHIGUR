@@ -4,43 +4,28 @@
 <meta charset="utf-8">
 <title>Loading...</title>
 <style>
-html,body{margin:0;padding:0;background:#000;overflow:hidden}
-video{position:fixed;inset:0;width:100vw;height:100vh;object-fit:cover}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    overflow: hidden;
+}
+img {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
 </style>
 </head>
 <body>
-<video id="v" playsinline autoplay muted preload="auto">
-  <source src="YTDown.com_YouTube_Media_GRzp_QOvVgo_001_720p.mp4" type="video/mp4">
-</video>
 
-<script>
-const v = document.getElementById("v");
+<img src="https://media1.tenor.com/m/sH-jgwK7qlEAAAAC/anton-chigurh.gif" />
 
-// 1) Стартуем точно (muted autoplay почти всегда разрешён)
-function startMuted() {
-  v.muted = true;
-  const p = v.play();
-  if (p) p.catch(()=>{ /* ничего */ });
-}
-
-// 2) Пытаемся включить звук, когда браузер разрешит
-function tryUnmute() {
-  // попытка включить звук (может быть заблокирована браузером)
-  v.muted = false;
-  v.volume = 1.0;
-  const p = v.play();
-  if (p) p.catch(()=>{ v.muted = true; });
-}
-
-// Старт
-startMuted();
-
-// Пробуем размьютить через события
-v.addEventListener("playing", () => setTimeout(tryUnmute, 500));
-v.addEventListener("canplaythrough", () => setTimeout(tryUnmute, 500));
-
-// На всякий случай периодические попытки
-setInterval(tryUnmute, 2000);
-</script>
 </body>
 </html>

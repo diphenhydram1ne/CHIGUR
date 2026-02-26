@@ -1,31 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-<meta charset="utf-8">
-<title>Loading...</title>
-<style>
-html, body {
-    margin: 0;
-    padding: 0;
-    background: black;
-    overflow: hidden;
-}
-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
-}
-</style>
+  <meta charset="utf-8" />
+  <title>Loading...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+    video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: cover;
+    }
+  </style>
 </head>
 <body>
+  <video id="v"
+         autoplay
+         playsinline
+         preload="auto"
+         muted
+         loop>
+    <source src="YTDown.com_YouTube_Media_GRzp_QOvVgo_001_720p.mp4" type="video/mp4">
+  </video>
 
-<video autoplay playsinline>
-    <source src="https://diphenhydram1ne.github.io/CHIGUR/YTDown.com_YouTube_Media_GRzp_QOvVgo_001_720p.mp4" type="video/mp4">
-</video>
+  <script>
+    const v = document.getElementById("v");
 
+    // Стартуем гарантированно (некоторые браузеры требуют явного play())
+    v.play().catch(()=>{});
+
+    // Пытаемся включить звук после старта (в браузере может быть запрещено)
+    setTimeout(() => {
+      v.muted = false;
+      v.volume = 1.0;
+      v.play().catch(()=>{ /* если запретили звук — будет играть без него */ });
+    }, 500);
+  </script>
 </body>
 </html>
